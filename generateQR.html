@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generate QR</title>
+</head>
+<body>
+
+<h2>QR Code for John</h2>
+<div id="qrcode"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+const user = "John"; // 可以改成不同 user
+const url = "login.html?user=" + user; // QR 扫描后直接打开 login.html
+
+new QRCode(document.getElementById("qrcode"), {
+    text: url,
+    width: 250,
+    height: 250
+});
+</script>
+
+</body>
+</html>

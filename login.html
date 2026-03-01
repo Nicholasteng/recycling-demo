@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Worker Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h2>Worker Login</h2>
+
+<input type="text" id="username" placeholder="Username"><br><br>
+<input type="password" id="password" placeholder="Password"><br><br>
+
+<button onclick="login()">Login</button>
+
+<p id="message"></p>
+
+<script>
+function login() {
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const user = urlParams.get("user"); // 从 QR 链接获取 user
+
+    if(username === "worker1" && password === "123456") {
+        sessionStorage.setItem("workerLoggedIn", "true");
+        // 登录成功后跳转到 recycle form
+        window.location.href = "recycle.html?user=" + user;
+    } else {
+        document.getElementById("message").innerText = "Login failed";
+    }
+}
+</script>
+
+</body>
+</html>

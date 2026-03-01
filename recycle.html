@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recycling Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h2>Recycling Form</h2>
+
+<div id="formContainer" style="display:none;">
+    <p id="userDisplay"></p>
+
+    <label>Material:</label>
+    <select id="material">
+        <option>Plastic</option>
+        <option>Paper</option>
+        <option>Metal</option>
+    </select>
+    <br><br>
+
+    <label>Weight (kg):</label>
+    <input type="number" id="weight" step="0.01">
+    <br><br>
+
+    <button onclick="submitForm()">Submit</button>
+    <p id="result"></p>
+</div>
+
+<script>
+// 检查是否登录
+if(sessionStorage.getItem("workerLoggedIn") !== "true") {
+    // 记录当前页面
+    sessionStorage.setItem("redirectAfterLogin", window.location.href);
+    alert("Please login first.");
+    window.location.href = "login.html";
+} else {
+    document.getElementById("formContainer").style.display = "block";
+}
+
+// 获取 URL 参数
+const urlParams = new URLSearchParams(window.location.search);
+const user = urlParams.get("user");
+document.getElementById("userDisplay").innerText = "User: " + user;
+
+function submitForm() {
+    const material = document.getElementById("material").value;
+    const weight = document.getElementById("weight").value;
+
+    if(weight === "") {
+        alert("Please enter weight");
+        return;
+    }
+
+    document.getElementById("result").innerText =
+        "Recorded: " + material + " - " + weight + "kg for " + user;
+}
+</script>
+
+</body>
+</html>
